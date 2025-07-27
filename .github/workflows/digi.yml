@@ -1,4 +1,4 @@
-name: Kablo EPG Bot
+name: Seda EPG Bot
 
 on:
   schedule:
@@ -25,8 +25,8 @@ jobs:
           pip install requests # Eğer requirements.txt kullanmıyorsanız bu şekilde
           # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi # Eğer requirements.txt kullanıyorsanız bu kalsın
 
-      - name: Run digikablo.py
-        run: python digikablo.py
+      - name: Run seda.py
+        run: python seda.py
 
       - name: Commit and push changes
         run: |
