@@ -1,0 +1,39 @@
+name: Kablovod Güncelleme
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'  # Her 4 saatte bir çalışır (UTC)
+  workflow_dispatch:  # Manuel çalıştırma da mümkün
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Repo'yu klonla
+      uses: actions/checkout@v3
+
+    - name: Python'u kur
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Gerekli kütüphaneleri yükle
+      run: pip install requests
+
+    - name: Python scripti çalıştır
+      run: python kablovod.py
+
+    - name: README.md güncelle
+      run: |
+        echo "## Son Güncelleme: $(TZ='Europe/Istanbul' date '+%d.%m.%Y %H:%M')" > README.md
+        echo "" >> README.md
+        echo "Bu liste her 4 saatte bir otomatik güncellenir." >> README.md
+
+    - name: Değişiklikleri commitle ve pushla
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add vodden_proxy.m3u README.md
+        git commit -m "⏱️ Otomatik güncelleme: $(TZ='Europe/Istanbul' date)"
+        git push
