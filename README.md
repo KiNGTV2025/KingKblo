@@ -1,3 +1,3 @@
-## Son Güncelleme: 10.08.2025 07:41
+## Son Güncelleme: 10.08.2025 11:25
 
 Bu liste her 4 saatte bir otomatik güncellenir.
